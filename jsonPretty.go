@@ -39,7 +39,9 @@ func newJSONPrettyCodec(options utils.InterfaceMap) (codecs.Codec, error) {
 }
 
 func (c *JSONPrettyCodec) setConfig(options utils.InterfaceMap) error {
-	if err := config.VerifySettings(options, jsonConfigSchema); err != nil {
+	var err error
+	options, err = config.VerifySettings(options, jsonConfigSchema)
+	if err != nil {
 		return err
 	}
 
